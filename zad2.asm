@@ -22,7 +22,7 @@
 	add $t1, $zero, $t0
 	
 	for:
-	    beq $t0, $s0, exit
+	    bge $t0, $s0, exit
 	    addi $t0, $t0, 1
 	    mul $t1, $t0, $t1
 	    j for

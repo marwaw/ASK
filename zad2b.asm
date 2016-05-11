@@ -18,7 +18,7 @@
 	 add $t1, $zero, $t0
 	    
 	 while:
-	    beq $t0, $s0, next
+	    bge $t0, $s0, next
 	    addi $t0, $t0, 1
 	    mulo $t1, $t0, $t1
 	    j while
