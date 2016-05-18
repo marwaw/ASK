@@ -92,25 +92,26 @@
        	 	iloczynSkalarny:
         		addi $t0, $zero, 0 # ktora z kolei wartosc
 			addi $t1, $zero, 0 # przesuniecie w wektorze porzadku
-			addi $t2, $zero, 0 # przesuniecie w wektorze wartosci
+			addi $t2, $zero, 0 # przesuniecie w wektorze wartosci1
+			addi $t6, $zero, 0 # przesuniecie w wektorze wartosci2
 			addi $t3, $zero, 0 #aktualna wartosc iloczynu
 		
 			while:
 				beq $t0, $s0, wynik
 				lw $t4, wektorPorz1($t1)
-				beq $t4, $zero, next
-				lw $t5, wektorPorz2($t1)
-				beq $t5, $zero, next
+				beq $t4, $zero, drugaWar
 				lw $t4, wektorWar1($t2)
-				lw $t5, wektorWar2($t2)
+				addi $t2, $t2, 4
+			drugaWar: lw $t5, wektorPorz2($t1)
+				beq $t5, $zero, next
+				lw $t5, wektorWar2($t6)
+				addi $t6, $t6, 4
 				mul $t4, $t4, $t5
 				add $t3, $t3, $t4
-				addi $t2, $t2, 4
-				
-				addi $t4, $zero, 0
-				addi $t5, $zero, 0
 				
 				next:
+					addi $t4, $zero, 0
+					addi $t5, $zero, 0
 					addi $t1, $t1, 4
 					addi $t0, $t0, 1
 					j while
