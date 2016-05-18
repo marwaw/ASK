@@ -5,16 +5,16 @@
 	space: .asciiz ", "
 
 .text
-	.main:		
+	main:		
 		# ile liczb posortowac
-		li $v0, 4
+		li $t0, -1
+		li $v0, 51
 		la $a0, ile
 		syscall
 			
-		li $v0, 5
-		syscall
+		beq $a1, $t0, main
 		# $s0 - rozmiar tablicy
-		move $s0, $v0
+		move $s0, $a0
 		
 		addi $t1, $zero, 0
 		addi $t2, $zero, 0
