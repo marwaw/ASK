@@ -6,13 +6,13 @@
 	rozmiar: .asciiz "Podaj rozmiar wektorow: "
 	wartosci: .asciiz "Podaj wartosc: "
 	
-	drugi: .asciiz "Podaj drugi wektor \n"
+	pierwszy: .asciiz "Podaj wartosci pierwszego wektora \n"
+	drugi: .asciiz "Podaj wartosci drugiego wektora \n"
 	wyswietl: .asciiz "Wartosc iloczynu: "
 	
 .text
 
-
-	.main
+	main:
 		# pytanie o rozmiar wektorow
 		li $v0, 4
 		la $a0, rozmiar
@@ -27,7 +27,12 @@
 		addi $t1, $zero, 0 # przesuniecie w wektorze porzadku
 		addi $t2, $zero, 0 # przesuniecie w wektorze wartosci
 	
-		wartosci1:  
+		li $v0, 4
+		la $a0, pierwszy
+		syscall
+			
+		wartosci1: 
+		
 			beq $t0, $s0, dalej
 			addi $t0, $t0, 1
 		
@@ -102,7 +107,8 @@
 				beq $t4, $zero, drugaWar
 				lw $t4, wektorWar1($t2)
 				addi $t2, $t2, 4
-			drugaWar: lw $t5, wektorPorz2($t1)
+			drugaWar: 
+				lw $t5, wektorPorz2($t1)
 				beq $t5, $zero, next
 				lw $t5, wektorWar2($t6)
 				addi $t6, $t6, 4
